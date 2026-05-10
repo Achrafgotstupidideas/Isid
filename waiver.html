@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAGEZONE — Before You Enter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0D0C0B;
+    --rage: #B3122F;
+    --rage-dim: #7a0d20;
+    --ash: #D6D6D6;
+    --smoke: #8A8A91;
+    --char: #3D3D42;
+    --surface: #141210;
+  }
+
+  html, body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--ash);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    cursor: crosshair;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.6;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  .back {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--char);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 80px;
+    transition: color 0.2s;
+  }
+  .back:hover { color: var(--smoke); }
+
+  .gate-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--rage);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 10vw, 80px);
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    color: var(--ash);
+    margin-bottom: 60px;
+  }
+
+  .waiver-block {
+    border-left: 1px solid var(--char);
+    padding: 0 0 0 28px;
+    margin-bottom: 48px;
+  }
+
+  .waiver-block h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--rage);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .waiver-block p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--smoke);
+  }
+
+  .waiver-block p em {
+    color: var(--ash);
+    font-style: normal;
+  }
+
+  .waiver-block p strong {
+    color: var(--ash);
+    font-weight: 400;
+  }
+
+  .rule {
+    width: 100%;
+    height: 1px;
+    background: var(--char);
+    margin: 60px 0;
+  }
+
+  .mental-health-note {
+    background: var(--surface);
+    border: 1px solid var(--char);
+    padding: 20px 24px;
+    margin-bottom: 60px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--smoke);
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+  }
+
+  .mental-health-note a {
+    color: var(--ash);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 40px;
+    cursor: pointer;
+  }
+
+  .checkbox-row input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 1px solid var(--char);
+    background: transparent;
+    cursor: crosshair;
+    margin-top: 2px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .checkbox-row input[type="checkbox"]:checked {
+    border-color: var(--rage);
+    background: var(--rage);
+  }
+
+  .checkbox-row input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 6px;
+    height: 11px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+
+  .checkbox-row label {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--smoke);
+    cursor: crosshair;
+  }
+
+  .checkbox-row label em {
+    color: var(--ash);
+    font-style: normal;
+  }
+
+  .enter-btn {
+    display: block;
+    width: 100%;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.2em;
+    color: var(--char);
+    background: transparent;
+    border: 1px solid var(--char);
+    padding: 24px;
+    text-align: center;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .enter-btn.active {
+    color: var(--ash);
+    border-color: var(--rage);
+    cursor: crosshair;
+  }
+
+  .enter-btn.active::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--rage);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+
+  .enter-btn.active:hover::before { transform: scaleX(1); }
+  .enter-btn.active:hover { color: #fff; }
+
+  .refuse-link {
+    display: block;
+    text-align: center;
+    margin-top: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--char);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .refuse-link:hover { color: var(--smoke); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <a href="index.html" class="back">← Back</a>
+
+  <p class="gate-label">// Welcome</p>
+  <h1>Before<br>You<br>Enter</h1>
+
+  <div class="waiver-block">
+    <h3>What this space is</h3>
+    <p>This is a <em>place</em> where raw unfiltered human emotion. It is not a safe space. You may encounter content that is intense, heavy, or emotionally distressing. That is intentional.</p>
+  </div>
+
+  <div class="waiver-block">
+    <h3>Assumption of risk</h3>
+    <p>By entering, you accept that you <em>will encounter content that is offensive, graphic, or emotionally hostile</em>. This content exists because real human beings needed to release it. You are choosing to witness that.</p>
+  </div>
+
+  <div class="waiver-block">
+    <h3>The venting clause</h3>
+    <p><em>Nothing posted here reflects real-world intent.</em> All content is expression, not action. Anger is not a threat. Grief is not a diagnosis. What you read here is someone's darkest moment made safe by being said out loud. It is not who they are. It is not who you are.</p>
+  </div>
+
+  <div class="waiver-block">
+    <h3>Your protection</h3>
+    <p>You take full responsibility for your emotional experience here. <em>The owners of this site are not liable</em> for any distress arising from your visit. Every submission is reviewed and <em>stripped of all identifying information</em> before publication. Names, places, relationships are all removed. </p>
+  </div>
+
+  <div class="waiver-block">
+    <h3>What happens to what you write</h3>
+    <p>Your submission goes to a human reviewer. It will be read, <em>anonymized</em>, and if it fits this space, published. If it contains a real name, a specific address, or a credible threat, it will not be published.</p>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="mental-health-note">
+    ⚠ &nbsp;This site is not a substitute for professional mental health support.<br>
+    If you are in crisis right now, please reach someone who can actually help:<br>
+    <strong>International Association for Suicide Prevention:</strong> <a href="https://www.iasp.info/resources/Crisis_Centres/" target="_blank">iasp.info/resources/Crisis_Centres</a>
+  </div>
+
+  <div class="checkbox-row">
+    <input type="checkbox" id="agree" onchange="toggleBtn()">
+    <label for="agree">
+      I have read and understood everything above. I enter <em>freely, knowingly, and without pressure</em>. I understand this is a psychological outlet, not reality. I take responsibility for my experience here.
+    </label>
+  </div>
+
+  <a href="room.html" class="enter-btn" id="enterBtn" onclick="return checkAgreement(event)">
+    I UNDERSTAND — LET ME IN
+  </a>
+
+  <a href="index.html" class="refuse-link">I'm not ready — take me back</a>
+</div>
+
+<script>
+  function toggleBtn() {
+    const cb = document.getElementById('agree');
+    const btn = document.getElementById('enterBtn');
+    btn.classList.toggle('active', cb.checked);
+  }
+
+  function checkAgreement(e) {
+    const cb = document.getElementById('agree');
+    if (!cb.checked) {
+      e.preventDefault();
+      return false;
+    }
+    return true;
+  }
+</script>
+</body>
+</html>
